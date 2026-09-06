@@ -2,42 +2,42 @@
 
 ## Workflow
 
-- Before editing, inspect docs, manifests, lockfiles, scripts, tests, and Git status; follow project conventions, preserve user changes, and avoid unrelated refactors, upgrades, or lockfile refreshes.
-- Keep temporary, generated, and auxiliary files inside the project and clean them up; choose targeted checks or full tests/builds by risk, and avoid low-value tests.
+- Before editing, inspect the project's documentation, configuration, scripts, tests, and Git status when present. Follow existing conventions, preserve user changes, and avoid unrelated refactors, upgrades, or dependency changes.
+- Keep temporary, generated, and auxiliary files inside the project and clean them up. Choose verification proportional to the change, prioritizing focused checks over low-value tests. Do not add tests for reversible, low-impact changes that merely restate the implementation unless their risk warrants it.
 
 ## Communication and Decisions
 
-- If a plan involves an uncovered matter that affects the goal, scope, or result, explain its importance, options, and impact before asking; use reasonable defaults for details that do not affect the goal.
-- Apply explicit in-scope changes or objections directly; when important assumptions, risks, or conflicts arise, explain the basis and ask the user to decide.
+- When an uncovered issue could affect scope or results, explain its importance, assumptions, and options before asking for a decision. Otherwise, use reasonable defaults and proceed with in-scope changes.
 
 ## Dependencies and Environments
 
 - Prefer `pnpm` for new JavaScript/TypeScript projects; use `uv`, `pyproject.toml`, `uv.lock`, and a project-local `.venv` following `.python-version` for new Python projects.
-- Do not migrate existing npm, pip, or `requirements.txt` projects without reason; do not maintain multiple lockfiles or manually edit generated files or virtual environments. Ask before installing global tools.
+- Preserve existing package-manager, dependency, lockfile, and virtual-environment conventions. Do not migrate tooling or refresh lockfiles without a clear reason, and do not manually edit generated files or virtual environments. Ask before installing global tools.
 
 ## Directories, Files, and Naming
 
-- Separate source, scripts, tests, docs, and generated artifacts by responsibility; keep only entry points and required configuration at the root, place new files in the matching directory, and distinguish development, test, and production variants by suffix or directory.
-- Follow ecosystem and existing naming conventions; keep case, separators, and suffixes consistent at each level, use names that state responsibility, and avoid vague abbreviations.
+- Separate source, scripts, tests, documentation, generated artifacts, and configuration by responsibility. Keep only required entry points and configuration at the project root.
+- Place new files in the directory that owns their responsibility, and distinguish development, test, and production variants clearly.
+- Follow existing naming conventions for case, separators, suffixes, and abbreviations. Use names that state responsibility.
 
 ## Frontend
 
-- Keep interfaces simple and components reusable; maintain consistent semantics, accessibility, layout, and copy, and cover loading, empty, error, hover, focus, and mobile states.
-- Drive rendering from explicit state and centralize state changes; isolate styles, events, and layering for embedded, floating, or plugin UI, considering viewport, scrollbars, and window changes.
-- Use standard icon-library assets selected by meaning, not hand-drawn approximations. When applicable, prefer `transform` and `opacity` for animation; match timing, curves, and direction to interaction semantics, avoid meaningless bounce or overshoot, and support `prefers-reduced-motion`.
+- Keep interfaces simple, reusable, and consistent. Follow existing design conventions; search for and reuse existing components, utilities, and dependencies before adding new ones. Avoid duplicate implementations and one-off visual rules.
+- Maintain semantics, accessibility, layout, and copy; cover relevant loading, empty, error, interaction, and responsive states. Drive rendering from explicit state and centralize state changes.
+- Keep styles, events, and layering predictable, especially around overlays and responsive layouts. Keep animations purposeful and restrained, and respect reduced-motion preferences.
 
 ## Backend
 
-- Prefer platform capabilities and existing dependencies according to project scale; keep service boundaries clear and avoid dependencies for simple features.
-- Use allowlists for routes, files, and resources; normalize and validate inputs and upstream metadata, limit access, and provide safe, predictable fallback when data is unrecognized.
-- Default to asynchronous server I/O, adjusting for runtime characteristics when necessary; set accurate status codes, content types, caching, and CORS by interface need, and keep responses consistent.
-- Record sufficient server-side error context without exposing internal details to clients; isolate development, hot-reload, and test entry points from production and remove temporary entries after verification.
+- Prefer platform capabilities and existing dependencies according to project scale; keep service boundaries clear and avoid unnecessary dependencies.
+- For external inputs and exposed resources, use allowlists where appropriate, normalize and validate values, and provide safe fallbacks for unrecognized input.
+- Use asynchronous I/O where appropriate. For network interfaces, return accurate status codes, content types, caching behavior, and CORS settings.
+- Record enough server-side context to diagnose failures without exposing internal details. Keep development and test entry points separate from production.
 
 ## Documentation and Format
 
-- Aim README and API docs at users, contributors, deployers, and maintainers; objectively cover purpose, installation, configuration, usage, testing, and deployment.
-- Use one H1 and clear Markdown hierarchy; label code blocks, use inline code for commands, paths, configuration keys, and API fields, and keep examples copyable and current.
-- Use descriptive link text and consistent terminology, language, and heading style; do not copy temporary conversation, negative feedback, or implementation history.
+- Keep user, contributor, deployment, and maintenance documentation accurate and task-oriented.
+- Use one H1 and a clear Markdown hierarchy. Label code blocks and use inline code for commands, paths, configuration keys, and API fields.
+- Use descriptive links and consistent terminology. Keep examples current and copyable, and do not include temporary conversation or implementation history.
 
 ## Git and GitHub
 
